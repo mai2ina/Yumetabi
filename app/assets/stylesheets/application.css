@@ -136,3 +136,9 @@ body {
     background: #b3002d;
     border: none;
 }
+
+@media screen and (max-width: 600px) {
+    .travel-image img {
+        width: 100vw;
+    }
+}

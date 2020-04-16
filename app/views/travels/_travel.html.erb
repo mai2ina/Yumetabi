@@ -47,8 +47,8 @@
               <% if action_name == "edit" %>
                 <div class="image-box">
                   <% unless travel.travel_images.count.zero? %>
-                    <%#<%= image_tag travel.travel_images.first.image.url %>
-                    <%= t_img.tag :t_img.object.image %> 
+                    <%= image_tag travel.travel_images.first.image.url %>
+                    <%# <%= t_img.tag :t_img.object.image %> <%# <-これはエラーになる %>
                     <p>
                       <%= t_img.check_box :_destroy %>
                       <%= t_img.label :_destroy, "削除" %>
@@ -57,6 +57,8 @@
                 </div>
               <% end %>
             </div>
+
+            <%# ファイル選択ボタンと travel_image の id(ないと画像編集できない）%>
             <%= t_img.file_field :image %>
             <div class="attention text-left">
               <p>※画像はjpeg形式もしくはpng形式です。</p>
