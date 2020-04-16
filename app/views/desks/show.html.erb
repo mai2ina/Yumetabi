@@ -1,0 +1,9 @@
+<%= render 'layouts/navbar' %>
+
+<main>
+  <div class="page_header">
+    <h1><%= @desk.name %></h1>
+  </div>
+  
+  <%= render 'desk', desk: @desk %>
+</main>

@@ -1,0 +1,40 @@
+<%= render 'layouts/navbar' %>
+
+<main class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12 page_header">
+    <h1><%= @desk.name %>の旅行一覧</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-8 offset-sm-2">
+      <div class="header">
+        <span class="index-btn"><%= link_to "新規", new_travel_path(did: @desk.id), class: 'btn btn-sm btn-primary' %></span>
+        <!--<span class="back-btn"><%= link_to "戻る", desk_path(@desk), class: 'btn btn-sm btn-primary' %></span>-->
+      </div>
+
+      <% unless @travels.nil? %>
+        <% @travels.each do |travel| %>
+          <div class="media">
+            <div class="media-body">
+              <div class="record">
+              <div class="row d-flex align-items-center">
+                <div class="col-sm-8 record-left">
+                  <p><%= travel.name %></p>
+                </div>
+                <div class="col-sm-4 text-right">
+                  <span class="show-btn"><%= link_to "詳細", travel, class: 'btn btn-sm btn-primary' %></span>
+                  <span class="edit-btn"><%= link_to "編集", edit_travel_path(travel, did: @desk.id ), class: 'btn btn-sm btn-primary' %></span>
+                  <span class="delete-btn"><%= link_to "削除", travel, method: :delete, data: { confirm: travel.name + "を削除しますか？"}, class: 'btn btn-sm btn-primary' %></span>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <%= paginate @travels %>
+      <% end %>
+    </div>
+  </div>
+</main>

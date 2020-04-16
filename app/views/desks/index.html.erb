@@ -1,0 +1,53 @@
+<%= render 'layouts/navbar' %>
+
+<main class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12 page_header">
+    <h1>卓一覧</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-8 offset-sm-2">
+      <div class="header">
+        <div class="new-btn">
+          <%= link_to "新規", new_desk_path, class: 'btn btn-sm btn-primary' %>
+        </div>
+        <div class="attention">
+          <p>※旅行を登録するには「詳細」ページにて「旅行一覧」をクリックしてください。</p>  
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-8 offset-sm-2">
+      <% unless @desks.nil? %>
+        <% @desks.each do |desk| %>
+          <div class="media">
+            <div class="media-body">
+              <div class="record">
+                <div class="row">
+                  <p><%= desk.name %></p>
+                </div>
+    
+                <div class="row">
+                  <div class="col-sm-8">
+                    <p><%= simple_format(h(desk.overview)) %></p>
+                  </div>
+                  <div class="col-sm-4 text-right">
+                    <span class="show-btn"><%= link_to "詳細", desk, class: 'btn btn-sm btn-primary' %></span>
+                    <span class="edit-btn"><%= link_to "編集", edit_desk_path(desk), class: 'btn btn-sm btn-primary' %></span>
+                    <span class="delete-btn"><%= link_to "削除", desk, method: :delete, data: { confirm: desk.name + "を削除しますか？"}, class: 'btn btn-sm btn-primary' %></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <%= paginate @desks %>
+      <% end %>
+    </div>
+  </div>
+
+</main>

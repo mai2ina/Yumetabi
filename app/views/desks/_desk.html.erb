@@ -1,0 +1,58 @@
+<% unless action_name == "show" %>
+
+  <!-- new, edit の時の form -->
+  <div class="row">
+    <div class="col-sm-8 offset-sm-2">
+      <%= form_with(model: desk, local: true) do |f| %>
+        <%= render 'layouts/error_messages', model: f.object %>
+        
+        <div class="form-group">
+          <%= f.label :name, "卓名" %>
+          <%= f.text_field :name, class: 'form-control' %>
+        </div>
+  
+        <div class="form-group">
+          <%= f.label :overview, "概要" %>
+          <%= f.text_area :overview, class: 'form-control', rows: 7 %>
+        </div>
+  
+        <div class="text-center">
+          <% if action_name == "new" || action_name == "create" %>
+            <!-- new または validate エラー時に通る create -->
+            <p class="create-btn"><%= f.submit "作成", class: 'btn btn-primary' %></p>
+          <% else %>
+            <!-- edit -->
+            <p class="update-btn"><%= f.submit "更新", class: 'btn btn-primary' %></p>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+<% else %>
+
+  <!-- show の時の form -->
+  <div class="row">
+    <div class="col-sm-8 offset-sm-2">
+      <div class="header">
+        <div class="new-btn">
+          <%= link_to "旅行一覧", travels_path(did: params[:id]), class: 'btn btn-sm btn-primary' %>
+        </div>
+      </div>
+
+      <%= form_with(model: desk, local: true) do |f| %>
+        <!-- show の時は表示のみ可  -->
+        <div class="form-group">
+          <%= f.label :name, "卓名" %>
+          <%= f.text_field :name, class: 'form-control', readonly: true %>
+        </div>
+  
+        <div class="form-group">
+          <%= f.label :overview, "概要" %>
+          <%= f.text_area :overview, class: 'form-control', rows: 7, readonly: true %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+<% end %>

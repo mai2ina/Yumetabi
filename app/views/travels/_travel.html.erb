@@ -1,0 +1,129 @@
+<% unless action_name == "show" %>
+
+  <!-- new, edit の時の form -->
+  <div class="row">
+    <div class="col-sm-8 offset-sm-2">
+      <%= form_with(model: travel, local: true) do |f| %>
+        <%= render 'layouts/error_messages', model: f.object %>
+        <div class="form-group">
+          <%= f.label :name, "旅行名(必須)" %>
+          <%= f.text_field :name, class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :country, "国名(必須)" %>
+          <%= f.text_field :country, class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :prefecture, "県（州）名(必須)" %>
+          <%= f.text_field :prefecture, class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :city, "市名" %>
+          <%= f.text_field :city, class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :starts_on, "期間" %>
+          <%= f.date_field :starts_on, class: 'form-control' %>
+          <%= f.date_field :ends_on, class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :want_to_go, "行きたいところ" %>
+          <%= f.text_area :want_to_go, class: 'form-control', rows: 7 %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :want_to_do, "やりたいこと" %>
+          <%= f.text_area :want_to_do, class: 'form-control', rows: 7 %>
+        </div>
+
+        <%= f.fields_for :travel_images do |t_img| %>
+          <div class="form-group">
+            <div class="travel-image">
+              <% unless travel.travel_images.count.zero? %>
+                <%= image_tag travel.travel_images.first.image.url %> 
+              <% end %>
+            </div>
+            <%= t_img.file_field :image %>
+            <p>画像はjpeg形式もしくはpng形式</p>
+            <%= t_img.hidden_field :id, value: t_img.object.id %>
+          </div>
+        <% end %>
+
+        <% if action_name == "new" || action_name == "create" %>
+          <!-- new または validate エラー時に通る create -->
+          <input type="hidden" id="did" name="did" value=<%= @desk.id %>>
+        <% end %>
+        
+        <div class="text-center">
+          <% if action_name == "new" || action_name == "create" %>
+            <!-- new または validate エラー時に通る create -->
+            <p class="create-btn"><%= f.submit "作成", class: 'btn btn-primary' %></p>
+          <% else %>
+            <p class="update-btn"><%= f.submit "更新", class: 'btn btn-primary' %></p>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+<% else %>
+
+  <!-- show の時の form -->
+  <div class="row">
+    <div class="col-sm-8 offset-sm-2">
+      <div class="header">
+        <%= link_to "お気に入り", root_path, class: 'btn btn-sm btn-primary favorite-btn' %>
+      </div>
+
+      <%= form_with(model: travel, local: true) do |f| %>
+        <div class="form-group">
+          <%= f.label :name, "旅行名" %>
+          <%= f.text_field :name, class: 'form-control', readonly: true %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :country, "国名" %>
+          <%= f.text_field :country, class: 'form-control', readonly: true %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :prefecture, "県（州）名" %>
+          <%= f.text_field :prefecture, class: 'form-control', readonly: true %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :city, "市名" %>
+          <%= f.text_field :city, class: 'form-control', readonly: true %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :starts_on, "期間" %>
+          <%= f.date_field :starts_on, class: 'form-control', readonly: true %>
+          <%= f.date_field :ends_on, class: 'form-control', readonly: true %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :want_to_go, "行きたいところ" %>
+          <%= f.text_area :want_to_go, class: 'form-control', rows: 7, readonly: true %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :want_to_do, "やりたいこと" %>
+          <%= f.text_area :want_to_do, class: 'form-control', rows: 7, readonly: true %>
+        </div>
+
+        <div class="form-group">
+          <% unless travel.travel_images.count.zero? %>
+              <%= image_tag travel.travel_images.first.image.url %> 
+          <% end %>  
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+<% end %>
