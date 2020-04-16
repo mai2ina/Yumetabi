@@ -44,12 +44,23 @@
         <%= f.fields_for :travel_images do |t_img| %>
           <div class="form-group">
             <div class="travel-image">
-              <% unless travel.travel_images.count.zero? %>
-                <%= image_tag travel.travel_images.first.image.url %> 
+              <% if action_name == "edit" %>
+                <div class="image-box">
+                  <% unless travel.travel_images.count.zero? %>
+                    <%#<%= image_tag travel.travel_images.first.image.url %>
+                    <%= t_img.tag :t_img.object.image %> 
+                    <p>
+                      <%= t_img.check_box :_destroy %>
+                      <%= t_img.label :_destroy, "削除" %>
+                    </p>
+                  <% end %>
+                </div>
               <% end %>
             </div>
             <%= t_img.file_field :image %>
-            <p>画像はjpeg形式もしくはpng形式</p>
+            <div class="attention text-left">
+              <p>※画像はjpeg形式もしくはpng形式です。</p>
+            </div>
             <%= t_img.hidden_field :id, value: t_img.object.id %>
           </div>
         <% end %>

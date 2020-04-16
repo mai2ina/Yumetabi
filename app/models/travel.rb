@@ -1,4 +1,8 @@
 class Travel < ApplicationRecord
+  before_save { 
+    travel_images.each{ |t_img| t_img.mark_for_destruction if t_img.image.blank? } 
+  }
+
   validates :name, presence: true, length: {maximum: 30 }
   validates :country, presence: true, length: {maximum: 255 }
   validates :prefecture, presence: true, length: {maximum: 255 }

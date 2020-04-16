@@ -19,8 +19,9 @@ class TravelsController < ApplicationController
   end
 
   def create
-    #binding.pry
     @travel = Desk.find(params[:did]).travels.build(travel_params)
+    # travel_images のデータがなかったら作成から外す
+    #binding.pry
     if @travel.save
       flash[:success] = "新規の旅行を作成しました。"
       redirect_to @travel
@@ -34,6 +35,11 @@ class TravelsController < ApplicationController
   def edit
     @desk = Desk.find(params[:did])
     @travel = @desk.travels.find_by(id: params[:id])
+    #binding.pry
+    if @travel.travel_images.count.zero?
+      # build しないと edit で画像アップロード用のフォームが生成できない
+      @travel.travel_images.build
+    end
     #binding.pry
   end
 
@@ -60,6 +66,6 @@ class TravelsController < ApplicationController
   private
   
   def travel_params
-    params.require(:travel).permit(:name, :country, :prefecture, :city, :starts_on, :ends_on, :want_to_go, :want_to_do, :did, travel_images_attributes: [:image, :id])
+    params.require(:travel).permit(:name, :country, :prefecture, :city, :starts_on, :ends_on, :want_to_go, :want_to_do, :did, travel_images_attributes: [:image, :id, :_destroy])
   end
 end
