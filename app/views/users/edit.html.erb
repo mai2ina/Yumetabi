@@ -9,25 +9,29 @@
     <div class="col-sm-8 offset-sm-2">
       <%= form_with(model: @user, local: true) do |f| %>
         <%= render 'layouts/error_messages', model: f.object %>
-        <div class="form-group">
-          <%= f.label :name, "名前" %>
-          <%= f.text_field :name, class: 'form-control' %>
-        </div>
 
         <div class="profile-image">
-          <% if @user.image? %>
-            <%= image_tag @user.image.url %>
-          <% else %>
-            <%= image_tag "/noimage.png" %>
-          <% end %>       
+          <figure>
+            <% if @user.image? %>
+              <%= image_tag @user.image.url %>
+            <% else %>
+              <%= image_tag "/noimage_120.png", class:"rounded-circle icon_image mr-2 mb-2" %>
+            <% end %>
+          </figure>
         </div>
+
         <div class="form-group">
             <%= f.file_field :image %>
         </div>
 
         <div class="form-group">
+          <%= f.label :name, "ユーザー名" %>
+          <%= f.text_field :name, class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
           <%= f.label :biography, "自己紹介" %>
-          <%= f.text_area :biography, class: 'form-control', rows: 7 %>
+          <%= f.text_area :biography, class: 'form-control', rows: 7, maxlength: 255 %>
         </div>
 
         <p class="text-center">

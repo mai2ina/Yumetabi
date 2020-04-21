@@ -28,11 +28,11 @@ class TravelimageUploader < CarrierWave::Uploader::Base
   #   # do something
   # end
 
-  process resize_to_fit: [600, 600]
+  process resize_to_fit: [300, 300]#[600, 600]
 
-  version :thumb do
-    process resize_to_fill: [300, 300, "center"]
-  end
+#  version :thumb do
+#    process resize_to_fill: [300, 300, "center"]
+#  end
 
   # Create different versions of your uploaded files:
   # version :thumb do

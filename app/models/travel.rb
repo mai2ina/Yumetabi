@@ -13,6 +13,7 @@ class Travel < ApplicationRecord
   
   belongs_to :desk
   has_many :travel_images, dependent: :destroy
+  has_many :travel_comments, dependent: :destroy
   
   accepts_nested_attributes_for :travel_images, allow_destroy: true
 

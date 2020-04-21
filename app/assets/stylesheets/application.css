@@ -108,14 +108,17 @@ body {
 }
 
 .profile-image {
-    width: 200px;
-    height: 200px;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
 }
 
-.profile-image img {
-    border: solid 10px #330e00;
-    border-radius: 10px;
-    box-shadow: 2px 2px 4px 4px rgba(0, 0, 0, 0.1);
+.profile-image figure img {
+    border: solid 5px #330e00;
+}
+
+.edit-profile {
+    padding-top: 10%;
+    margin-left: auto;
 }
 
 .travel-image img {
@@ -125,16 +128,50 @@ body {
     /*box-shadow: 2px 2px 4px 4px rgba(0, 0, 0, 0.1);*/
 }
 
-.new-btn .btn, .show-btn .btn, .edit-btn .btn, .index-btn .btn, .back-btn .btn, .update-btn .btn, .create-btn .btn, .favorite-btn {
+.new-btn .btn, .show-btn .btn, .edit-btn .btn, .index-btn .btn, 
+.back-btn .btn, .update-btn .btn, .create-btn .btn, .favorite-btn .btn, 
+.comment-btn .btn {
     border-radius: 5px;
     background: #ff743d;
     border: none;
+}
+
+.comment-btn .btn {
+    margin-top: .5em;
+    margin-bottom: .5em;
 }
 
 .delete-btn .btn {
     border-radius: 5px;
     background: #b3002d;
     border: none;
+}
+
+.comment-wrapper {
+    margin-top: 100px;
+}
+
+.comment-wrapper h4 {
+    margin-bottom: 1em;
+}
+
+.travel-comment-box {
+    margin-bottom: 2rem;
+}
+
+.travel-comment-box figure {
+    margin: 0;
+}
+
+.travel-comment-box figure figcaption {
+    color: #b3002d;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.travel-comment-box a:hover {
+    color: #b3002d;
+    text-decoration: underline;
 }
 
 @media screen and (max-width: 600px) {

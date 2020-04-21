@@ -8,6 +8,8 @@ class TravelsController < ApplicationController
 
   def show
     @travel = Travel.find(params[:id])
+    @t_comments = @travel.travel_comments
+    @t_comment = @travel.travel_comments.build
     #binding.pry
   end
 
@@ -15,13 +17,10 @@ class TravelsController < ApplicationController
     @desk = Desk.find(params[:did])
     @travel = @desk.travels.build  # new の form_with 用
     @travel.travel_images.build
-    #binding.pry
   end
 
   def create
     @travel = Desk.find(params[:did]).travels.build(travel_params)
-    # travel_images のデータがなかったら作成から外す
-    #binding.pry
     if @travel.save
       flash[:success] = "新規の旅行を作成しました。"
       redirect_to @travel
@@ -35,16 +34,13 @@ class TravelsController < ApplicationController
   def edit
     @desk = Desk.find(params[:did])
     @travel = @desk.travels.find_by(id: params[:id])
-    #binding.pry
     if @travel.travel_images.count.zero?
-      # build しないと edit で画像アップロード用のフォームが生成できない
+      # ここで build しないと edit で画像アップロード用のフォームが生成できない
       @travel.travel_images.build
     end
-    #binding.pry
   end
 
   def update
-    #binding.pry
     @travel = Travel.find(params[:id])
     if @travel.update(travel_params)
       flash[:success] = "旅行の情報は正常に更新されました。"

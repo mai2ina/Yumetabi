@@ -90,7 +90,7 @@
   <div class="row">
     <div class="col-sm-8 offset-sm-2">
       <div class="header">
-        <%= link_to "お気に入り", root_path, class: 'btn btn-sm btn-primary favorite-btn' %>
+        <p class="favorite-btn"><%= link_to "お気に入り", root_path, class: 'btn btn-sm btn-primary' %></p>
       </div>
 
       <%= form_with(model: travel, local: true) do |f| %>
@@ -136,6 +136,38 @@
           <% end %>  
         </div>
       <% end %>
+
+      <div class="comment-wrapper">
+        <h4>コメント欄</h4>
+        <% @t_comments.each do |comment| %>
+          <% unless comment.new_record? %>
+            <div class="travel-comment-box">
+              <% unless comment.user.blank? %>
+                <a href="<%= user_path(comment.user_id) %>">
+                  <figure class="d-inline-flex">
+                    <% if comment.user.image? %>
+                      <%= image_tag comment.user.image.url, class:"rounded-circle icon_image mr-2 mb-2", width: "60px", height: "60px" %>
+                    <% else %>
+                      <%= image_tag "/noimage_120.png", class:"rounded-circle icon_image mr-2 mb-2", width: "60px", height: "60px" %>
+                    <% end %>
+                    <figcaption class="my-3"><%= comment.user.name %></figcaption>
+                  </figure>
+                </a>
+              <% end %>
+              <p><%= comment.content %></p>
+            </div>
+          <% end %>
+        <% end %>
+
+        <%= form_with(model: [travel, @t_comment], url: travel_comments_path, local: true) do |f| %>
+          <input type="hidden" id="tid" name="tid" value=<%= travel.id %>>
+          <div class="form-group">
+            <%= f.text_area :content, class: "form-control", rows: 2, maxlength: 255 %>
+            <p class="comment-btn"><%= f.submit "コメントする", class: "btn btn-primary" %></p>
+          </div>
+        <% end %>
+      </div>
+
     </div>
   </div>
 

@@ -19,4 +19,5 @@ Rails.application.routes.draw do
   
   resources :relationships, only: [:create, :destroy]
   resources :favorites, only: [:create, :destroy]
+  resources :travel_comments, only: [:create]
 end
