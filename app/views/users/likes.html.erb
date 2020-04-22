@@ -1,0 +1,10 @@
+<div class="row">
+  <aside class="col-sm-4">
+    <%= render 'myprofile', user: @user %>
+    <%= render 'relationships/follow_button', user: @user %>
+  </aside>
+  <div class="col-sm-8">
+    <%= render 'tabs', user: @user %>
+    <%= render 'microposts/microposts', microposts: @microposts %>
+  </div>
+</div>

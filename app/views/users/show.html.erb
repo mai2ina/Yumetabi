@@ -18,6 +18,11 @@
 
   <div class="row">
     <div class="col-sm-8 offset-sm-2">
+
+      <div class="follow-btn text-right">
+        <%= render 'relationships/follow_button', user: @user %>
+      </div>
+
       <%= form_with(model: @user, local: true) do |f| %>
         <div class="profile-header d-flex">
           <div class="profile-image">
@@ -30,18 +35,19 @@
               <figcaption><strong><%= @user.name %></strong></figcaption>
             </figure>
           </div>
-          <div class="edit-profile">
-            <span class="edit-btn"><%= link_to "プロフィール編集", edit_user_path(@user), class: 'btn btn-sm btn-primary' %></span>
-          </div>
+          <% if current_user == @user %>
+            <div class="edit-profile">
+              <span class="edit-btn"><%= link_to "プロフィール編集", edit_user_path(@user), class: 'btn btn-sm btn-primary' %></span>
+            </div>
+          <% end %>
         </div>
 
         <div class="form-group">
           <%= f.text_area :biography, class: 'form-control', rows: 7, readonly: true%>
         </div>
       <% end %>
-      <%= render 'relationships/follow_button', user: @user %>
       
-      <p class="delete-btn"><%= link_to "退会", root_path, class: 'btn btn-sm btn-primary' %></p>
+      <p class="delete-btn"><%= link_to "退会", root_path, class: 'btn btn-sm btn-danger' %></p>
     </div>
   </div>
 </main>

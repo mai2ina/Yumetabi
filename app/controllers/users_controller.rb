@@ -26,13 +26,12 @@ class UsersController < ApplicationController
 
   def edit
     @user = current_user
-    #binding.pry
   end
 
   def update
     @user = current_user
     #binding.pry
-    if @user.update(edit_user_params)
+    if @user.update(user_params)
       flash[:success] = "プロフィールは正常に更新されました。"
       redirect_to @user
     else
@@ -47,7 +46,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :image, :biography)
+    params.require(:user).permit(:name, :email, :password, :password_confirmationv, :image, :biography)
   end
   
   def correct_user

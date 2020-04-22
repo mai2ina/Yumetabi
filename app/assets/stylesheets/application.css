@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #E3D7C9;
+    background-color: #e3d7c9;
 }
 
 .toppage {
@@ -123,17 +123,25 @@ body {
 
 .travel-image img {
     margin-top: 1em;
-    /*border: solid 10px #330e00;*/
-    /*border-radius: 10px;*/
-    /*box-shadow: 2px 2px 4px 4px rgba(0, 0, 0, 0.1);*/
 }
 
 .new-btn .btn, .show-btn .btn, .edit-btn .btn, .index-btn .btn, 
 .back-btn .btn, .update-btn .btn, .create-btn .btn, .favorite-btn .btn, 
-.comment-btn .btn {
-    border-radius: 5px;
-    background: #ff743d;
+.comment-btn .btn, .follow-btn .btn {
     border: none;
+    border-radius: 5px;
+    background: rgba(255, 116, 61, 1);
+    transition: background .8s;
+}
+
+.new-btn .btn:hover, .show-btn .btn:hover, .edit-btn .btn:hover, .index-btn .btn:hover, 
+.back-btn .btn:hover, .update-btn .btn:hover, .create-btn .btn:hover, .follow-btn .btn:hover, 
+.favorite-btn .btn:hover, .comment-btn .btn:hover{
+    background: rgba(255, 116, 61, .7);
+}
+
+.follow-btn .btn {
+    margin-top: 1rem;
 }
 
 .comment-btn .btn {
@@ -142,9 +150,14 @@ body {
 }
 
 .delete-btn .btn {
-    border-radius: 5px;
-    background: #b3002d;
     border: none;
+    border-radius: 5px;
+    background: rgba(179, 0, 45, 1);
+    transition: background .8s;
+}
+
+.delete-btn .btn:hover {
+    background: rgba(179, 0, 45, .7);
 }
 
 .comment-wrapper {

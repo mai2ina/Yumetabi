@@ -21,9 +21,9 @@ private
   
   # validates カスタムメソッド
 def after_date
-    if starts_on > ends_on
-      errors.add(:starts_on, "Start date is later than end date.")
-    end
+  if starts_on > ends_on
+    errors.add(:starts_on, "Start date is later than end date.")
+  end
 end
 
 end

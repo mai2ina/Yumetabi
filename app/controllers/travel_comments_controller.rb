@@ -1,6 +1,5 @@
 class TravelCommentsController < ApplicationController
   def create
-    #binding.pry
     @travel = Travel.find(params[:tid])
     @t_comment = @travel.travel_comments.build(travel_comment_params)
     @t_comment.user_id = current_user.id  # これがないとコメントを送信した User と関連づけできない

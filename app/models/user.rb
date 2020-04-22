@@ -10,11 +10,17 @@ class User < ApplicationRecord
   mount_uploader :image, ImageUploader
   
   has_many :desks, dependent: :destroy
+  has_many :travel_comments, dependent: :destroy
+
+  # フォロー機能のモデル
   has_many :relationships, dependent: :destroy
   has_many :followings, through: :relationships, source: :follow
   has_many :reverses_of_relationship, class_name: 'Relationship', foreign_key: 'follow_id', dependent: :destroy
   has_many :followers, through: :reverses_of_relationship, source: :user
-  has_many :travel_comments, dependent: :destroy
+
+  # お気に入り機能のモデル
+  has_many :favorites, dependent: :destroy
+  has_many :liked, through: :favorites, source: :travel
 
   def follow(other_user)
     unless self == other_user
@@ -38,5 +44,9 @@ class User < ApplicationRecord
   def dislike(travel)
     favorite = self.favorites.find_by(travel_id: travel.id)
     favorite.destroy if favorite
+  end
+
+  def is_liked(travel)
+    self.liked.include?(travel)
   end
 end

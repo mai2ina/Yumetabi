@@ -89,8 +89,8 @@
   <!-- show の時の form -->
   <div class="row">
     <div class="col-sm-8 offset-sm-2">
-      <div class="header">
-        <p class="favorite-btn"><%= link_to "お気に入り", root_path, class: 'btn btn-sm btn-primary' %></p>
+      <div class="header favorite-btn">
+        <%= render 'favorites/favorite_button', travel: travel %>
       </div>
 
       <%= form_with(model: travel, local: true) do |f| %>

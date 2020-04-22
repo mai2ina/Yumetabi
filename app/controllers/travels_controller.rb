@@ -42,6 +42,7 @@ class TravelsController < ApplicationController
 
   def update
     @travel = Travel.find(params[:id])
+    binding.pry
     if @travel.update(travel_params)
       flash[:success] = "旅行の情報は正常に更新されました。"
       #redirect_to travels_url
