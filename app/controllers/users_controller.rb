@@ -3,9 +3,13 @@ class UsersController < ApplicationController
   before_action :correct_user, only: [:edit, :update]
 
   def show
-    @user = User.find_by(id: params[:id])
+    @user = User.includes(:desks => :travels).find_by(id: params[:id])
     if @user.nil?
       redirect_to current_user
+    else
+      counts(@user)
+      @desks = @user.desks.select(:id, :name)
+      @travels = @user.desks.map{ |desk| desk.travels }.flatten
     end
   end
 
@@ -41,6 +45,32 @@ class UsersController < ApplicationController
   end
 
   def destroy
+  end
+
+  def travellists
+    @user = User.includes(:desks => :travels).find(params[:id])
+    @desks = @user.desks.select(:id, :name)
+    @travels = @user.desks.map{ |desk| desk.travels }.flatten
+    counts(@user)
+  end
+
+  def followings
+    @user = User.find(params[:id])
+    @followings = @user.followings.page(params[:page])
+    counts(@user)
+  end
+  
+  def followers
+    @user = User.find(params[:id])
+    @followers = @user.followers.page(params[:page])
+    counts(@user)
+  end
+  
+  def likes
+    @user = User.find(params[:id])
+    @desks = @user.desks.select(:id, :name)
+    @favorites = @user.liked.page(params[:page])
+    counts(@user)
   end
 
   private

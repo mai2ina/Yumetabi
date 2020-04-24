@@ -7,9 +7,13 @@ class TravelsController < ApplicationController
   end
 
   def show
-    @travel = Travel.find(params[:id])
-    @t_comments = @travel.travel_comments
-    @t_comment = @travel.travel_comments.build
+    @travel = Travel.find_by(id: params[:id])
+    if @travel.nil?
+      redirect_back(fallback_location: root_path)
+    else
+      @t_comments = @travel.travel_comments
+      @t_comment = @travel.travel_comments.build
+    end
     #binding.pry
   end
 

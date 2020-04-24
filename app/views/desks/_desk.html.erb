@@ -35,9 +35,11 @@
   <div class="row">
     <div class="col-sm-8 offset-sm-2">
       <div class="header">
-        <div class="new-btn">
-          <%= link_to "旅行一覧", travels_path(did: params[:id]), class: 'btn btn-sm btn-primary' %>
-        </div>
+        <% if current_user.id == desk.user_id %>
+          <div class="new-btn">
+            <%= link_to "旅行一覧", travels_path(did: params[:id]), class: 'btn btn-sm btn-primary' %>
+          </div>
+        <% end %>
       </div>
 
       <%= form_with(model: desk, local: true) do |f| %>

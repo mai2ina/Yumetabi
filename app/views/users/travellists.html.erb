@@ -1,0 +1,22 @@
+<%= render 'layouts/navbar' %>
+
+<main class="container-fluid">
+
+  <div class="row">
+    <div class="col-sm-12 page_header">
+      <h1><%= @user.name %></h1>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-sm-8 offset-sm-2">
+
+<%= render 'user', user: @user %>
+<%= render 'travels/travels', travels: @travels, desks: @desks %>
+
+      <p class="withdraw-btn"><%= link_to "退会", root_path, class: 'btn btn-sm btn-danger' %></p>
+
+    </div>
+  </div>
+
+</main>

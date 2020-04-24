@@ -1,10 +1,22 @@
-<div class="row">
-  <aside class="col-sm-4">
-    <%= render 'myprofile', user: @user %>
-    <%= render 'relationships/follow_button', user: @user %>
-  </aside>
-  <div class="col-sm-8">
-    <%= render 'tabs', user: @user %>
-    <%= render 'users', users: @followers %>
+<%= render 'layouts/navbar' %>
+
+<main class="container-fluid">
+
+  <div class="row">
+    <div class="col-sm-12 page_header">
+      <h1><%= @user.name %></h1>
+    </div>
   </div>
-</div>
+  
+  <div class="row">
+    <div class="col-sm-8 offset-sm-2">
+
+<%= render 'user', user: @user %>
+<%= render 'users', users: @followers %>
+
+      <p class="withdraw-btn"><%= link_to "退会", root_path, class: 'btn btn-sm btn-danger' %></p>
+
+    </div>
+  </div>
+
+</main>

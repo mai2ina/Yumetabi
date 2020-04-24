@@ -14,7 +14,10 @@ class Travel < ApplicationRecord
   belongs_to :desk
   has_many :travel_images, dependent: :destroy
   has_many :travel_comments, dependent: :destroy
-  
+
+  has_many :favorites, foreign_key: :travel
+  has_many :liked_user, through: :favorites, source: :user
+
   accepts_nested_attributes_for :travel_images, allow_destroy: true
 
 private
