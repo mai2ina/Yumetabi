@@ -46,7 +46,6 @@ class TravelsController < ApplicationController
 
   def update
     @travel = Travel.find(params[:id])
-    binding.pry
     if @travel.update(travel_params)
       flash[:success] = "旅行の情報は正常に更新されました。"
       #redirect_to travels_url
@@ -62,6 +61,10 @@ class TravelsController < ApplicationController
     @travel.destroy
     flash[:success] = "旅行を削除しました。"
     redirect_back(fallback_location: root_path)
+  end
+  
+  def search
+    @travels = Travel.search(params[:name], params[:country], params[:prefecture]).page(params[:page])
   end
   
   private

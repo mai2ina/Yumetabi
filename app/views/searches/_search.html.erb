@@ -1,0 +1,142 @@
+<%= render 'layouts/navbar' %>
+
+<main class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12 page_header">
+    <h1>検索</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-8 offset-sm-2">
+      <div class="header">
+
+      <% if controller_name == "travels" %>
+
+        <%= form_with url:search_travels_path, method: :get, local: true do |f| %>
+          <div class="row">
+            <div class="col-sm-2">
+              <%= f.label :name, '旅行名' %>
+            </div>
+            <div class="col-sm-10">
+              <%= f.text_field :name, size: 60, maxlength: 30 %>
+            </div>
+  
+            <div class="col-sm-2">
+              <%= f.label :country, '国名' %>
+            </div>
+            <div class="col-sm-10">
+              <%= f.text_field :country, size: 60, maxlength: 255 %>
+            </div>
+  
+            <div class="col-sm-2">
+              <%= f.label :prefecture, '県（州）名' %>
+            </div>
+            <div class="col-sm-10">
+              <%= f.text_field :prefecture, size: 60, maxlength: 255 %>
+            </div>
+  
+            <div class="offset-sm-8 col-sm-4">
+              <%= button_tag type: 'submit', class: "submit_btn" do %>
+                  <i class="fa fa-search"></i>検索
+              <% end %>
+              <%= link_to 'リセット', search_travels_path %>
+            </div>
+          </div>
+        <% end %>
+
+      <% else controller_name == "users" %>
+
+        <%= form_with url:search_users_path, method: :get, local: true do |f| %>
+          <div class="row">
+            <div class="col-sm-2">
+              <%= f.label :name, 'ユーザー名' %>
+            </div>
+            <div class="col-sm-10">
+              <%= f.text_field :name, size: 60, maxlength: 50 %>
+            </div>
+  
+            <div class="offset-sm-8 col-sm-4">
+              <%= button_tag type: 'submit', class: "submit_btn" do %>
+                  <i class="fa fa-search"></i>検索
+              <% end %>
+              <%= link_to 'リセット', search_users_path %>
+            </div>
+          </div>
+        <% end %>
+
+      <% end %>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-8 offset-sm-2">
+
+      <ul class="nav nav-tabs nav-justified">
+        <li class="nav-item">
+          <a href="<%= search_travels_path %>" class="nav-link <%= 'active' if current_page?(search_travels_path) %>">
+            <i class="fas fa-plane"></i></i>旅行一覧
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="<%= search_users_path %>" class="nav-link <%= 'active' if current_page?(search_users_path) %>">
+            <i class="fas fa-user"></i>ユーザー一覧
+          </a>
+        </li>
+      </ul>
+
+      <% if controller_name == "travels" %>
+        <!-- 旅行検索結果 -->
+        <% if travels.any? %>
+          <ul class="list-unstyled search-travels-list">
+            <% travels.each do |travel| %>
+              <li class="media">
+                <div class="media-body">
+                  <div class="record">
+                    <p><a href="<%= desk_path(Desk.find(travel.desk_id).id) %>"><%= Desk.find(travel.desk_id).name %></a></p>
+                    <a href="<%= travel_path(travel) %>">
+                      <p><span class="travel-item-title">旅行名</span><%= travel.name %></p>
+                      <p><span class="travel-item-title">国名</span><%= travel.country %></p>
+                      <p><span class="travel-item-title">県（州）名</span><%= travel.prefecture %></p>
+                    </a>
+                  </div>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+          <%= paginate travels %>
+        <% end %>
+
+      <% else controller_name == "users" %>
+        <!-- ユーザー検索結果 -->
+        <% if users.any? %>
+          <ul class="list-unstyled users-list">
+            <% users.each do |user| %>
+              <li class="media">
+                <div class="media-body my-3">
+                  <a href="<%= user_path(user) %>">
+                    <figure class="d-inline-flex">
+                      <% if user.image? %>
+                        <%= image_tag user.image.url, class:"rounded-circle icon_image mr-2 mb-2", width: "60px", height: "60px" %>
+                      <% else %>
+                        <%= image_tag "noimage_120.png", class:"rounded-circle icon_image mr-2 mb-2", width: "60px", height: "60px" %>
+                      <% end %>
+                      <figcaption class="my-3"><%= user.name %></figcaption>
+                    </figure>
+                  </a>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+          <%= paginate users %>
+        <% end %>
+
+      <% end %>
+
+
+    </div>
+  </div>
+
+</main>

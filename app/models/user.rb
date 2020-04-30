@@ -8,9 +8,6 @@ class User < ApplicationRecord
   has_secure_password
   
   mount_uploader :image, ImageUploader
-  
-  has_many :desks, dependent: :destroy
-  has_many :travel_comments, dependent: :destroy
 
   # フォロー機能のモデル
   has_many :relationships, dependent: :destroy
@@ -21,6 +18,11 @@ class User < ApplicationRecord
   # お気に入り機能のモデル
   has_many :favorites, dependent: :destroy
   has_many :liked, through: :favorites, source: :travel
+  
+  # desks を先に持ってくるとアカウント削除の時の関連テーブルの削除が travels->favories になり、
+  # favorites の参照レコードがなくなる場合にエラーが出るため、desks は最後に持ってくる
+  has_many :desks, dependent: :destroy
+  has_many :travel_comments, dependent: :destroy
 
   def follow(other_user)
     unless self == other_user
@@ -48,5 +50,10 @@ class User < ApplicationRecord
 
   def is_liked(travel)
     self.liked.include?(travel)
+  end
+
+  def self.search(search1)
+    return User.all if search1.blank?
+    User.where(['(name LIKE ?)', "%#{search1}%"])
   end
 end

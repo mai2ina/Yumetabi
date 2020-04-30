@@ -45,6 +45,8 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    current_user.destroy
+    redirect_to root_url
   end
 
   def travellists
@@ -73,10 +75,14 @@ class UsersController < ApplicationController
     counts(@user)
   end
 
+  def search
+    @users = User.search(params[:name]).page(params[:page])
+  end
+
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmationv, :image, :biography)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :image, :biography)
   end
   
   def correct_user

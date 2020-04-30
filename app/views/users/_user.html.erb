@@ -10,9 +10,9 @@
               <div class="profile-image">
                 <figure>
                   <% if user.image? %>
-                    <%= image_tag user.image.url %>
+                    <%= image_tag user.image.url, class:"rounded-circle icon_image mr-2 mb-2" %>
                   <% else %>
-                    <%= image_tag "/noimage_120.png", class:"rounded-circle icon_image mr-2 mb-2" %>
+                    <%= image_tag "noimage_120.png", class:"rounded-circle icon_image mr-2 mb-2" %>
                   <% end %>   
                   <figcaption><strong><%= user.name %></strong></figcaption>
                 </figure>

@@ -1,18 +1,18 @@
 <% if travels.any? %>
-    <ul class="list-unstyled travels-list">
-      <% travels.each do |travel| %>
-        <li class="media">
-          <div class="media-body">
-            <div class="record">
-              <p><a href="<%= desk_path(@desks.find(travel.desk_id).id) %>"><%= @desks.find(travel.desk_id).name %></a></p>
-              <p><a href="<%= travel_path(travel) %>"><%= travel.name %></a></p>
-            </div>
+  <ul class="list-unstyled travels-list">
+    <% travels.each do |travel| %>
+      <li class="media">
+        <div class="media-body">
+          <div class="record">
+            <p><a href="<%= desk_path(@desks.find(travel.desk_id).id) %>"><%= @desks.find(travel.desk_id).name %></a></p>
+            <p><a href="<%= travel_path(travel) %>"><%= travel.name %></a></p>
           </div>
-        </li>
-      <% end %>
-    </ul>
-    <% if action_name == "likes" %>
-      <%= paginate travels %>
+        </div>
+      </li>
     <% end %>
+  </ul>
+  <% if action_name == "likes" %>
+    <%= paginate travels %>
+  <% end %>
 <% end %>
 

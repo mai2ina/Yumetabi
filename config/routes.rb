@@ -13,10 +13,17 @@ Rails.application.routes.draw do
       get :followers
       get :likes
     end
+    collection do
+      get :search
+    end
   end
   
   resources :desks
-  resources :travels
+  resources :travels do
+    collection do
+      get :search
+    end
+  end
   
   resources :relationships, only: [:create, :destroy]
   resources :favorites, only: [:create, :destroy]

@@ -7,25 +7,8 @@ body {
 .toppage {
     padding-top: 10%;
     text-align: center;
-    /*background: url("/globalmap.jpg")  no-repeat center center / cover;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    z-index: 0;*/
-}
-
-.toppage::before {
-    /*content: "";
-    padding-top: 10%;
-    position: absolute;
     width: 100%;
-    height: 100%;
-    background: inherit;
-    filter: brightness(75%);
-    z-index: -1;*/
+    height: 100vh;
 }
 
 #catchcopy {
@@ -89,6 +72,20 @@ body {
 
 .record .desk-row:first-child {
     margin-top: 1rem;
+}
+
+.row .date-label {
+    display: block;
+}
+
+.row .reriod-symbol {
+    margin-right: 1rem;
+    margin-left: 1rem;
+}
+
+.row input[type="date"] {
+    display: inline-block;
+    width: 11rem;
 }
 
 .header {
@@ -168,6 +165,10 @@ body {
     background: rgba(179, 0, 45, .7);
 }
 
+.submit_btn:hover {
+    cursor: pointer;
+}
+
 .comment-wrapper {
     margin-top: 100px;
 }
@@ -217,13 +218,15 @@ body {
 }
 
 .travels-list,
-.users-list {
+.users-list,
+.search-travels-list {
     border: solid 1px #aaaaaa;
     background-color: #fff2e3;
 }
 
 .travels-list li,
-.users-list li {
+.users-list li,
+.search-travels-list  {
     padding: 0 1.5rem;
 }
 
@@ -232,17 +235,18 @@ body {
 }
 
 .users-list li figure figcaption {
-    color: #b3002d;
+    color: #495057;
     font-weight: bold;
     text-decoration: none;
 }
 
 .users-list li a:hover {
-    color: #b3002d;
+    color: #495057;
     text-decoration: underline;
 }
 
-.travels-list .record {
+.travels-list .record,
+.search-travels-list .record {
     border: none;
     border-radius: 0;
     background-color: #fff2e3;
@@ -257,14 +261,32 @@ body {
     text-indent: 1rem;
 }
 
-.travels-list .record p a {
+.travels-list .record p a,
+.search-travels-list .record a {
     color: #495057;
     text-decoration: none;
 }
 
-.travels-list .record p a:hover {
+.travels-list .record p a:hover,
+.search-travels-list .record a:hover {
     color: #495057;
     text-decoration: underline;
+}
+
+.search-travels-list .record p {
+    text-indent: 1rem;
+    margin-bottom: 0rem;
+}
+
+.search-travels-list .record > p {
+    margin: 0.5rem 0;
+    font-weight: bold;
+    text-indent: 0;
+}
+
+.travel-item-title {
+    display: inline-block;
+    width: 8rem;
 }
 
 /* Font Awesome */

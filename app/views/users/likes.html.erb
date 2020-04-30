@@ -13,8 +13,7 @@
 
 <%= render 'user', user: @user %>
 <%= render 'travels/travels', travels: @favorites, desks: @desks %>
-
-      <p class="withdraw-btn"><%= link_to "退会", root_path, class: 'btn btn-sm btn-danger' %></p>
+<%= render 'withdraw_button', user: @user %>
 
     </div>
   </div>

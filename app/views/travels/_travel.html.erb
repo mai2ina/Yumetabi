@@ -26,8 +26,9 @@
         </div>
 
         <div class="form-group">
-          <%= f.label :starts_on, "期間" %>
+          <%= f.label :starts_on, "期間", class: 'date-label' %>
           <%= f.date_field :starts_on, class: 'form-control' %>
+          <span class="reriod-symbol">〜</span>
           <%= f.date_field :ends_on, class: 'form-control' %>
         </div>
 
@@ -115,8 +116,9 @@
         </div>
 
         <div class="form-group">
-          <%= f.label :starts_on, "期間" %>
+          <%= f.label :starts_on, "期間", class: 'date-label' %>
           <%= f.date_field :starts_on, class: 'form-control', readonly: true %>
+          <span class="reriod-symbol">〜</span>
           <%= f.date_field :ends_on, class: 'form-control', readonly: true %>
         </div>
 
@@ -148,7 +150,7 @@
                     <% if comment.user.image? %>
                       <%= image_tag comment.user.image.url, class:"rounded-circle icon_image mr-2 mb-2", width: "60px", height: "60px" %>
                     <% else %>
-                      <%= image_tag "/noimage_120.png", class:"rounded-circle icon_image mr-2 mb-2", width: "60px", height: "60px" %>
+                      <%= image_tag "noimage_120.png", class:"rounded-circle icon_image mr-2 mb-2", width: "60px", height: "60px" %>
                     <% end %>
                     <figcaption class="my-3"><%= comment.user.name %></figcaption>
                   </figure>
