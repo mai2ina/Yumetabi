@@ -8,6 +8,12 @@ class ApplicationController < ActionController::Base
       redirect_to login_url
     end
   end
+  
+  def confirm_logged_in
+    if logged_in?
+      redirect_to desks_url
+    end
+  end
 
   def counts(user)
     # ユーザが登録した旅行数、フォロー数、フォロワー数、お気に入り旅行数を取得

@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  before_action :confirm_logged_in, only: [:new]
+  
   def create
     email = params[:session][:email].downcase
     password = params[:session][:password]
