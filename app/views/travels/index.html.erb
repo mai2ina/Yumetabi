@@ -10,7 +10,9 @@
   <div class="row">
     <div class="col-sm-8 offset-sm-2">
       <div class="header">
-        <span class="index-btn"><%= link_to "新規", new_travel_path(did: @desk.id), class: 'btn btn-sm btn-primary' %></span>
+        <% if current_user.id == @desk.user_id %>
+          <span class="index-btn"><%= link_to "新規", new_travel_path(did: @desk.id), class: 'btn btn-sm btn-primary' %></span>
+        <% end %>
       </div>
 
       <% unless @travels.nil? %>
@@ -24,8 +26,10 @@
                 </div>
                 <div class="col-sm-4 text-right">
                   <span class="show-btn"><%= link_to "詳細", travel, class: 'btn btn-sm btn-primary' %></span>
-                  <span class="edit-btn"><%= link_to "編集", edit_travel_path(travel, did: @desk.id ), class: 'btn btn-sm btn-primary' %></span>
-                  <span class="delete-btn"><%= link_to "削除", travel, method: :delete, data: { confirm: travel.name + "を削除しますか？"}, class: 'btn btn-sm btn-primary' %></span>
+                  <% if current_user.id == @desk.user_id %>
+                    <span class="edit-btn"><%= link_to "編集", edit_travel_path(travel, did: @desk.id ), class: 'btn btn-sm btn-primary' %></span>
+                    <span class="delete-btn"><%= link_to "削除", travel, method: :delete, data: { confirm: travel.name + "を削除しますか？"}, class: 'btn btn-sm btn-primary' %></span>
+                  <% end %>
                 </div>
               </div>
               </div>

@@ -7,7 +7,7 @@ class DesksController < ApplicationController
   end
 
   def show
-    @desk = current_user.desks.find_by(id: params[:id])
+    @desk = Desk.find_by(id: params[:id])
     if @desk.nil?
       redirect_to desks_url
     end

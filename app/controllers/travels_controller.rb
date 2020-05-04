@@ -5,7 +5,6 @@ class TravelsController < ApplicationController
     @desk = Desk.find_by(id: params[:did])
     if @desk.nil?
       redirect_to root_url
-      # redirect_back(fallback_location: root_path)
     else
       @travels = @desk.travels.page(params[:page]).per(15)
     end
@@ -41,11 +40,15 @@ class TravelsController < ApplicationController
   end
 
   def edit
-    @desk = Desk.find(params[:did])
-    @travel = @desk.travels.find_by(id: params[:id])
-    if @travel.travel_images.count.zero?
-      # ここで build しないと edit で画像アップロード用のフォームが生成できない
-      @travel.travel_images.build
+    @desk = Desk.find_by(id: params[:did])
+    if @desk.nil?
+      redirect_back(fallback_location: root_path)
+    else
+      @travel = @desk.travels.find_by(id: params[:id])
+      if @travel.travel_images.count.zero?
+        # ここで build しないと edit で画像アップロード用のフォームが生成できない
+        @travel.travel_images.build
+      end
     end
   end
 
@@ -53,7 +56,6 @@ class TravelsController < ApplicationController
     @travel = Travel.find(params[:id])
     if @travel.update(travel_params)
       flash[:success] = "旅行の情報は正常に更新されました。"
-      #redirect_to travels_url
       redirect_back(fallback_location: root_path)
     else
       flash[:danger] = "旅行の情報は更新されませんでした。"
