@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :require_logged_in, only: [:show, :edit, :update, :destroy]
+  before_action :require_logged_in, only: [:show, :edit, :update, :destroy, :search]
   before_action :confirm_logged_in, only: [:new]
   before_action :correct_user, only: [:edit, :update]
 
