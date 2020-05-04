@@ -2,8 +2,13 @@ class TravelsController < ApplicationController
   before_action :require_logged_in
 
   def index
-    @desk = Desk.find(params[:did])
-    @travels = @desk.travels.page(params[:page]).per(15)
+    @desk = Desk.find_by(id: params[:did])
+    if @desk.nil?
+      redirect_to root_url
+      # redirect_back(fallback_location: root_path)
+    else
+      @travels = @desk.travels.page(params[:page]).per(15)
+    end
   end
 
   def show
